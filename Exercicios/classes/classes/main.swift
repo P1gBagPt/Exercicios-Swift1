@@ -20,7 +20,6 @@ class Person {
 let persons = Person(name: "João", age: 30)
 print("Nome: \(persons.name), Idade: \(persons.age)")
 
-
 struct Point {
     var x: Double
     var y: Double
@@ -33,7 +32,6 @@ struct Point {
 let point = Point(x: 3.0, y: 4.0)
 let distance = point.distanceToOrigin()
 print("Distância até a origem: \(distance)")
-
 
 class Shape {
     func draw() {
@@ -50,21 +48,11 @@ class Circle: Shape {
 let shape = Circle()
 shape.draw()
 
-
-
 protocol Describable {
     func describe()
 }
 
-class Person: Describable {
-    var name: String
-    var age: Int
-    
-    init(name: String, age: Int) {
-        self.name = name
-        self.age = age
-    }
-    
+extension Person: Describable {
     func describe() {
         print("Nome: \(name), Idade: \(age)")
     }
@@ -73,17 +61,15 @@ class Person: Describable {
 let person = Person(name: "Maria", age: 25)
 person.describe()
 
-
 extension Point {
     func isOrigin() -> Bool {
         return x == 0.0 && y == 0.0
     }
 }
 
-let point = Point(x: 0.0, y: 0.0)
-let isOrigin = point.isOrigin()
+let point2 = Point(x: 0.0, y: 0.0)
+let isOrigin = point2.isOrigin()
 print("Está na origem? \(isOrigin)")
-
 
 protocol Printable {
     var description: String { get }
@@ -95,9 +81,8 @@ extension Person: Printable {
     }
 }
 
-let person = Person(name: "João", age: 30)
-print(person.description)
-
+let person3 = Person(name: "João", age: 30)
+print(person3.description)
 
 class Vehicle {
     var numberOfWheels: Int
@@ -107,25 +92,24 @@ class Vehicle {
     }
     
     func drive() {
-        print("Dirigindo o veículo")
+        print("Conduzir o veículo")
     }
 }
 
 class Car: Vehicle {
     override func drive() {
-        print("Dirigindo o carro")
+        print("Conduzir o carro")
     }
 }
 
 let car = Car(numberOfWheels: 4)
 car.drive()
 
-
 protocol AreaCalculable {
     func calculateArea() -> Double
 }
 
-struct Circle: AreaCalculable {
+struct Circle2: AreaCalculable {
     var radius: Double
     
     func calculateArea() -> Double {
@@ -133,10 +117,9 @@ struct Circle: AreaCalculable {
     }
 }
 
-let circle = Circle(radius: 3.0)
-let area = circle.calculateArea()
+let circle2 = Circle2(radius: 3.0)
+let area = circle2.calculateArea()
 print("Área do círculo: \(area)")
-
 
 extension String {
     func reverse() -> String {
@@ -147,20 +130,11 @@ extension String {
 let reversedString = "Hello".reverse()
 print(reversedString)
 
-
 protocol Equatable {
     func isEqual(_ object: Self) -> Bool
 }
 
-class Person: Equatable {
-    var name: String
-    var age: Int
-    
-    init(name: String, age: Int) {
-        self.name = name
-        self.age = age
-    }
-    
+extension Person: Equatable {
     func isEqual(_ object: Person) -> Bool {
         return self.name == object.name && self.age == object.age
     }
@@ -168,8 +142,8 @@ class Person: Equatable {
 
 let person1 = Person(name: "João", age: 30)
 let person2 = Person(name: "Maria", age: 25)
-let person3 = Person(name: "João", age: 30)
+let person4 = Person(name: "João", age: 30)
 
 print(person1.isEqual(person2)) // false
-print(person1.isEqual(person3)) // true
+print(person1.isEqual(person4)) // true
 
